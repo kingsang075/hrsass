@@ -35,6 +35,14 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
+    },
+    // 配置反向地址
+    proxy: {
+      // 当我们的本地的请求 有/api的时候，就会代理我们的请求地址向另外一个服务器发出请求
+      '/api': {
+        target: 'http://ihrm-java.itheima.net/', // 跨域请求地址
+        changeOrigin: true // 是否跨域，必须true
+      }
     }
   },
   configureWebpack: {
