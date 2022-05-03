@@ -12,5 +12,12 @@ export default {
       title: '员工管理',
       icon: 'people' // 左侧导航读取title属性
     } // 路由元信息，可以放任何信息
+  }, {
+    path: 'detail/:id', // 动态路由参数
+    component: () => import('@/views/employees/detail'),
+    hidden: true,
+    meta: {
+      title: '员工详情'
+    }
   }]
 }
