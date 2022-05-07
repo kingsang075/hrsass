@@ -15,9 +15,16 @@ router.beforeEach(async(to, from, next) => {
     } else {
       if (!store.getters.userId) {
         // 如果没有id才表示当前用户资料没获取过
-        await store.dispatch('user/getUserInfo')
+        const { roles } = await store.dispatch('user/getUserInfo')
+        // 筛选用户可用路由
+        const routes = await store.dispatch('permission/filterRoutes', roles.menus)
+        // 必须用next（地址）
+        router.addRoutes([...routes, { path: '*', redirect: '/404', hidden: true }])
+        // [...routes, { path: '*', redirect: '/404', hidden: true }]
+        next(to.path)
+      } else {
+        next()
       }
-      next()
     }
   } else {
     // 没有token情况下
