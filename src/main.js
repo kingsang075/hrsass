@@ -16,6 +16,7 @@ import * as directives from '@/directives'
 import * as filters from '@/filters' // 引入工具类
 import '@/icons' // icon
 import '@/permission' // permission control
+import CheckPermission from '@/mixin/checkPermission'
 
 /**
  * If you don't want to use mock-server
@@ -39,6 +40,8 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 Vue.config.productionTip = false
+// 全局混入检查方法
+Vue.mixin(CheckPermission)
 
 new Vue({
   el: '#app',
